@@ -4,7 +4,10 @@ A fictional IT service desk ticketing app built for a development portfolio. Emp
 
 > **Demo project:** TopTrust Bank, its staff, and all ticket data are fictional. Do not use this app for real banking or customer information.
 
+![TopTrust Bank Help Desk dashboard](dashboard.png)
+
 ## Features
+
 
 - Role-based sign-in for employees, IT agents, and administrators
 - Create and track IT support tickets
