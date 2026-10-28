@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f6f8" />
+    <title>Analytics — HelpDesk Pro</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="analytics.css" />
+    <script src="analytics.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="index.html" aria-label="HelpDesk Pro home"><span class="brand-mark">H</span><span>helpdesk<span class="brand-light">pro</span></span></a>
+        <div class="workspace-label">WORKSPACE</div>
+        <nav>
+          <a class="nav-item" href="index.html"><span class="nav-icon">◫</span>Overview</a>
+          <a class="nav-item" href="index.html#tickets"><span class="nav-icon">▤</span>Tickets</a>
+          <a class="nav-item active" href="analytics.html"><span class="nav-icon">⌁</span>Analytics</a>
+        </nav>
+        <div class="sidebar-bottom"><div class="help-card"><span class="help-icon">?</span><strong>Need a hand?</strong><p>Visit the support center for quick answers.</p><a href="index.html">Back to dashboard <span>↗</span></a></div><div class="profile"><div class="avatar">JD</div><div><strong>Jordan Davis</strong><small>IT Administrator</small></div><button class="more" aria-label="Profile options">···</button></div></div>
+      </aside>
+      <main class="main-content">
+        <header class="topbar"><div class="breadcrumbs"><a href="index.html">Workspace</a><span>/</span>Analytics</div><div class="top-actions"><span class="today" id="today"></span><div class="avatar small-avatar">JD</div></div></header>
+        <section class="page-heading"><div><p class="eyebrow">REPORTING</p><h1>Support analytics</h1><p class="subheading">A live breakdown of the tickets saved in this browser.</p></div><button class="primary-button" id="export-report"><span>↓</span> Export CSV</button></section>
+        <p class="analytics-storage" id="analytics-status" role="status"></p>
+        <section class="stat-grid analytics-stats" aria-label="Analytics summary">
+          <article class="stat-card"><div class="stat-top"><span>Total tickets</span><span class="stat-icon blue">▤</span></div><div class="stat-value" id="total-count">0</div><div class="stat-foot">All demo requests</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Open queue</span><span class="stat-icon amber">◷</span></div><div class="stat-value" id="open-count">0</div><div class="stat-foot">Open and escalated</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Resolved</span><span class="stat-icon green">✓</span></div><div class="stat-value" id="resolved-count">0</div><div class="stat-foot" id="resolved-rate">0% of all tickets</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Urgent priority</span><span class="stat-icon violet">!</span></div><div class="stat-value" id="urgent-count">0</div><div class="stat-foot">Needs close attention</div></article>
+        </section>
+        <section class="analytics-grid">
+          <article class="panel report-panel"><div class="panel-heading"><div><h2>Tickets by category</h2><p>Request volume across support areas</p></div></div><div class="bar-report" id="category-report"></div></article>
+          <article class="panel report-panel"><div class="panel-heading"><div><h2>Queue status</h2><p>Current workflow distribution</p></div></div><div class="status-report" id="status-report"></div></article>
+          <article class="panel report-panel wide-report"><div class="panel-heading"><div><h2>Priority breakdown</h2><p>Ticket counts by requested urgency</p></div></div><div class="priority-report" id="priority-report"></div></article>
+        </section>
+        <section class="panel report-table"><div class="tickets-heading"><div><h2>Ticket report</h2><p>Current ticket records included in this report</p></div><a class="view-all" href="index.html#tickets">Manage tickets <span>→</span></a></div><div class="table-wrap"><table><thead><tr><th>TICKET</th><th>SUBJECT</th><th>CATEGORY</th><th>PRIORITY</th><th>STATUS</th><th>ASSIGNEE</th></tr></thead><tbody id="report-rows"></tbody></table><div class="empty-state" id="report-empty" hidden>No tickets found. Submit one from the dashboard first.</div></div></section>
+        <footer>© 2026 HelpDesk Pro <span>•</span> Demo workspace · Fictional sample data</footer>
+      </main>
+    </div>
+  </body>
+</html>

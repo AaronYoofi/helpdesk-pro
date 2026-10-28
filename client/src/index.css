@@ -1,0 +1,7 @@
+/* Global defaults are kept separate from the dashboard's component styles. */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { min-width: 360px; min-height: 100vh; margin: 0; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; }

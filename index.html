@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f6f8" />
+    <title>HelpDesk Pro — IT support overview</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#overview" aria-label="HelpDesk Pro home">
+          <span class="brand-mark">H</span><span>helpdesk<span class="brand-light">pro</span></span>
+        </a>
+        <div class="workspace-label">WORKSPACE</div>
+        <nav>
+          <a class="nav-item active" href="#overview"><span class="nav-icon">◫</span>Overview</a>
+          <a class="nav-item" href="#tickets"><span class="nav-icon">▤</span>Tickets <span class="nav-count" id="nav-count">0</span></a>
+          <a class="nav-item" href="analytics.html"><span class="nav-icon">⌁</span>Analytics</a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="help-card"><span class="help-icon">?</span><strong>Need a hand?</strong><p>Visit the support center for quick answers.</p><a href="#help">Open support center <span>↗</span></a></div>
+          <div class="profile"><div class="avatar">JD</div><div><strong>Jordan Davis</strong><small>IT Administrator</small></div><button class="more" aria-label="Profile options">···</button></div>
+        </div>
+      </aside>
+
+      <main class="main-content" id="overview">
+        <header class="topbar"><div class="breadcrumbs">Workspace <span>/</span> Overview</div><div class="top-actions"><span class="today" id="today"></span><button class="icon-button" aria-label="Notifications">♧<i></i></button><div class="avatar small-avatar">JD</div></div></header>
+        <section class="page-heading"><div><p class="eyebrow">MONDAY, OCTOBER 26, 2026</p><h1>Good morning, Jordan <span class="wave">✳</span></h1><p class="subheading">Here’s what’s happening with your support queue today.</p></div><button class="primary-button" id="new-ticket"><span>＋</span> New ticket</button></section>
+
+        <section class="stat-grid" aria-label="Ticket summary">
+          <article class="stat-card"><div class="stat-top"><span>Open tickets</span><span class="stat-icon blue">▤</span></div><div class="stat-value" id="open-total">0</div><div class="stat-foot"><span class="trend positive">↘ 12%</span> <span>vs. last week</span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>In progress</span><span class="stat-icon violet">◷</span></div><div class="stat-value" id="progress-total">0</div><div class="stat-foot"><span class="trend neutral">→ 4%</span> <span>vs. last week</span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Resolved today</span><span class="stat-icon green">✓</span></div><div class="stat-value" id="resolved-total">0</div><div class="stat-foot"><span class="trend positive">↗ 8%</span> <span>vs. last week</span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Avg. first response</span><span class="stat-icon amber">◴</span></div><div class="stat-value">18<span class="unit">m</span></div><div class="stat-foot"><span class="trend positive">↘ 6%</span> <span>vs. last week</span></div></article>
+        </section>
+
+        <section class="content-grid">
+          <article class="panel chart-panel" id="analytics"><div class="panel-heading"><div><h2>Ticket volume</h2><p>Incoming requests over the last 7 days</p></div><button class="select-button" id="chart-range">This week <span>⌄</span></button></div><div class="chart-legend"><span><i class="legend-dot"></i> Tickets received</span><strong>128 <small>tickets</small></strong></div><div class="chart" role="img" aria-label="Ticket volume chart for the week"><div class="y-labels"><span>40</span><span>30</span><span>20</span><span>10</span><span>0</span></div><div class="chart-plot"><div class="grid-lines"><i></i><i></i><i></i><i></i><i></i></div><svg viewBox="0 0 700 170" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="area" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#635bdb" stop-opacity=".18"/><stop offset="100%" stop-color="#635bdb" stop-opacity="0"/></linearGradient></defs><path class="chart-area" d="M0 125 C40 118 58 107 100 112 S160 80 200 91 S255 105 300 76 S360 78 400 62 S460 78 500 51 S560 60 600 35 S660 45 700 22 L700 170 L0 170 Z"/><path class="chart-line" d="M0 125 C40 118 58 107 100 112 S160 80 200 91 S255 105 300 76 S360 78 400 62 S460 78 500 51 S560 60 600 35 S660 45 700 22"/><circle cx="700" cy="22" r="4"/></svg><div class="x-labels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div></div></div></article>
+          <article class="panel category-panel"><div class="panel-heading"><div><h2>By category</h2><p>Open tickets by type</p></div><button class="dots" aria-label="More category options">···</button></div><div class="category-content"><div class="donut-wrap"><div class="donut"><div><strong>84</strong><span>open</span></div></div></div><div class="category-legend"><div><i class="c1"></i><span>Hardware</span><strong>32</strong></div><div><i class="c2"></i><span>Software</span><strong>24</strong></div><div><i class="c3"></i><span>Access</span><strong>18</strong></div><div><i class="c4"></i><span>Network</span><strong>10</strong></div></div></div></article>
+        </section>
+
+        <section class="panel tickets-panel" id="tickets"><p class="storage-status" id="storage-status" role="status"></p><div class="tickets-heading"><div><h2>Recent tickets</h2><p>A snapshot of your team's latest requests</p></div><a class="view-all" href="#tickets">View all tickets <span>→</span></a></div><div class="ticket-toolbar"><label class="search-box"><span>⌕</span><input id="search" type="search" placeholder="Search tickets..." aria-label="Search tickets" /></label><label class="filter-select"><span class="filter-icon">☷</span><select id="status-filter" aria-label="Filter tickets by status"><option value="all">All status</option><option>Open</option><option>In progress</option><option>Escalated</option><option>Resolved</option></select></label><label class="filter-select"><select id="priority-filter" aria-label="Filter tickets by priority"><option value="all">All priority</option><option>Urgent</option><option>High</option><option>Medium</option><option>Low</option></select></label></div><div class="table-wrap"><table><thead><tr><th>TICKET</th><th>SUBJECT</th><th>REQUESTER</th><th>PRIORITY</th><th>STATUS</th><th>ASSIGNEE</th><th></th></tr></thead><tbody id="ticket-rows"></tbody></table><div class="empty-state" id="empty-state" hidden>No tickets match those filters.</div></div><div class="table-footer"><span id="result-count"></span><button class="pagination" disabled>← <span>Previous</span></button><button class="pagination next" disabled><span>Next</span> →</button></div></section>
+        <footer>© 2026 HelpDesk Pro <span>•</span> Demo workspace · Fictional sample data</footer>
+      </main>
+    </div>
+    <dialog class="ticket-dialog" id="ticket-dialog" aria-labelledby="form-title">
+      <form id="ticket-form" method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">EMPLOYEE REQUEST</p><h2 id="form-title">Submit a ticket</h2><p>Tell the IT team what you need help with.</p></div><button type="button" class="close-dialog" id="close-dialog" aria-label="Close form">×</button></div>
+        <label class="form-field">Your name<input name="requester" required maxlength="60" placeholder="e.g. Taylor Reed" /></label>
+        <label class="form-field">Subject<input name="subject" required maxlength="100" placeholder="Briefly describe the issue" /></label>
+        <div class="form-row"><label class="form-field">Category<select name="category" required><option value="">Choose a category</option><option>Hardware</option><option>Software</option><option>Access</option><option>Network</option></select></label><label class="form-field">Priority<select name="priority" required><option value="">Choose priority</option><option>Low</option><option>Medium</option><option>High</option><option>Urgent</option></select></label></div>
+        <label class="form-field">Description<textarea name="description" required minlength="10" maxlength="1000" rows="4" placeholder="What happened, and what have you tried so far?"></textarea><span class="field-hint">Please include at least 10 characters.</span></label>
+        <div class="dialog-actions"><button type="button" class="cancel-button" id="cancel-ticket">Cancel</button><button type="submit" class="primary-button">Submit ticket</button></div>
+      </form>
+    </dialog>
+    <dialog class="ticket-dialog detail-dialog" id="detail-dialog" aria-labelledby="detail-title">
+      <form id="detail-form" method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow" id="detail-id">TICKET</p><h2 id="detail-title">Ticket details</h2><p id="detail-requester"></p></div><button type="button" class="close-dialog" id="close-detail" aria-label="Close details">×</button></div>
+        <label class="form-field">Description<textarea name="description" id="detail-description" required minlength="10" maxlength="1000" rows="4"></textarea></label>
+        <div class="form-row"><label class="form-field">Category<select name="category" id="detail-category"><option>Hardware</option><option>Software</option><option>Access</option><option>Network</option></select></label><label class="form-field">Priority<select name="priority" id="detail-priority"><option>Low</option><option>Medium</option><option>High</option><option>Urgent</option></select></label></div>
+        <div class="form-row"><label class="form-field">Status<select name="status" id="detail-status"><option>Open</option><option>In progress</option><option>Escalated</option><option>Resolved</option></select></label><label class="form-field">Assignee<select name="assignee" id="detail-assignee"><option>Unassigned</option><option>Alex Morgan</option><option>Jamie Lee</option><option>Riley Kim</option><option>Casey Rivera</option></select></label></div>
+        <p class="detail-note">Set status to <strong>Escalated</strong> to raise priority with the team, or <strong>Resolved</strong> when the request is complete.</p>
+        <div class="dialog-actions"><button type="button" class="cancel-button" id="cancel-detail">Cancel</button><button type="submit" class="primary-button">Save changes</button></div>
+      </form>
+    </dialog>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+client/node_modules/
+client/dist/
+server/node_modules/
+server/helpdesk.sqlite
+server/helpdesk.sqlite-shm
+server/helpdesk.sqlite-wal
+.env
+*.log
