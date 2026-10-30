@@ -3,6 +3,10 @@ import type { FormEvent } from 'react'
 import type { Ticket, TicketCategory, TicketPriority, TicketStatus } from './types/ticket'
 import './App.css'
 
+// Set VITE_API_BASE_URL when the API is hosted separately. Local development
+// continues to use the Express server on port 3001.
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001').replace(/\/$/, '')
+const apiUrl = (path: string) => `${API_BASE_URL}${path}`
 const storageKey = 'helpdesk-pro-tickets-v1'
 const categories: TicketCategory[] = ['Hardware', 'Software', 'Access', 'Network']
 const priorities: TicketPriority[] = ['Urgent', 'High', 'Medium', 'Low']
@@ -83,7 +87,7 @@ function App() {
   }, [theme])
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/auth/me', { credentials: 'include' })
+    fetch(apiUrl('/api/auth/me'), { credentials: 'include' })
       .then(async (response) => {
         if (response.status === 401) return null
         if (!response.ok) throw new Error('Could not check the sign-in session')
@@ -111,7 +115,7 @@ function App() {
       setTickets([])
       return
     }
-    fetch('http://localhost:3001/api/tickets', { credentials: 'include' })
+    fetch(apiUrl('/api/tickets'), { credentials: 'include' })
       .then((response) => {
         if (response.status === 401) throw new Error('401')
         if (!response.ok) throw new Error('Could not load tickets from the API')
@@ -126,7 +130,7 @@ function App() {
             const cached = JSON.parse(localStorage.getItem(storageKey) || '[]') as Ticket[]
             for (const ticket of cached) {
               if (!ticket.id || existingIds.has(ticket.id)) continue
-              const response = await fetch(`http://localhost:3001/api/tickets/${encodeURIComponent(ticket.id)}`, {
+              const response = await fetch(apiUrl(`/api/tickets/${encodeURIComponent(ticket.id)}`), {
                 method: 'PATCH',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
@@ -155,7 +159,7 @@ function App() {
   async function signIn(email: string, password: string) {
     setAuthError('')
     try {
-      const response = await fetch('http://localhost:3001/api/auth/login', {
+      const response = await fetch(apiUrl('/api/auth/login'), {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -174,7 +178,7 @@ function App() {
 
   async function signOut() {
     try {
-      await fetch('http://localhost:3001/api/auth/logout', { method: 'POST', credentials: 'include' })
+      await fetch(apiUrl('/api/auth/logout'), { method: 'POST', credentials: 'include' })
     } finally {
       setCurrentUser(null)
       setTickets([])
@@ -253,7 +257,7 @@ function App() {
     }
     let response: Response
     try {
-      response = await fetch('http://localhost:3001/api/tickets', {
+      response = await fetch(apiUrl('/api/tickets'), {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -306,7 +310,7 @@ function App() {
     setEditError('')
     let response: Response
     try {
-      response = await fetch(`http://localhost:3001/api/tickets/${encodeURIComponent(editingTicket.id)}`, {
+      response = await fetch(apiUrl(`/api/tickets/${encodeURIComponent(editingTicket.id)}`), {
         method: 'PATCH',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

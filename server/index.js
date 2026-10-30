@@ -7,12 +7,12 @@ const { promisify } = require("util");
 const scryptAsync = promisify(scrypt);
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // Store the database file in the server folder.
 const db = new Database(path.join(__dirname, "helpdesk.sqlite"));
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:5173", credentials: true }));
 app.use(express.json());
 
 // Local demo accounts and database-backed cookie sessions.
@@ -216,8 +216,9 @@ app.post("/api/auth/login", async (req, res) => {
   db.prepare("INSERT INTO sessions (token_hash, user_id, expires_at) VALUES (?, ?, ?)")
     .run(hashSessionToken(token), user.id, expiresAt);
   db.prepare("DELETE FROM sessions WHERE expires_at <= ?").run(Date.now());
-  const secureCookie = process.env.NODE_ENV === "production" ? "; Secure" : "";
-  res.setHeader("Set-Cookie", `toptrust_session=${token}; HttpOnly; SameSite=Strict; Path=/api; Max-Age=604800${secureCookie}`);
+  const isProduction = process.env.NODE_ENV === "production";
+  const cookiePolicy = isProduction ? "; SameSite=None; Secure" : "; SameSite=Strict";
+  res.setHeader("Set-Cookie", `toptrust_session=${token}; HttpOnly${cookiePolicy}; Path=/api; Max-Age=604800`);
   res.json({ user: { id: user.id, full_name: user.full_name, email: user.email, role: user.role } });
 });
 
@@ -227,7 +228,8 @@ app.get("/api/auth/me", requireAuth, (req, res) => {
 
 app.post("/api/auth/logout", requireAuth, (req, res) => {
   db.prepare("DELETE FROM sessions WHERE token_hash = ?").run(req.sessionTokenHash);
-  res.setHeader("Set-Cookie", "toptrust_session=; HttpOnly; SameSite=Strict; Path=/api; Max-Age=0");
+  const cookiePolicy = process.env.NODE_ENV === "production" ? "; SameSite=None; Secure" : "; SameSite=Strict";
+  res.setHeader("Set-Cookie", `toptrust_session=; HttpOnly${cookiePolicy}; Path=/api; Max-Age=0`);
   res.json({ status: "ok" });
 });
 
